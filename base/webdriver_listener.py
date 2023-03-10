@@ -1,8 +1,11 @@
 import pytest
 from selenium import webdriver
-from base import
+
 
 class WebDriverWrapper:
+    # def __init__(self):
+    #     self.driver = None
+
     @pytest.fixture(scope="function", autouse=True)
     def browser_config(self):
         self.driver = webdriver.Chrome()
