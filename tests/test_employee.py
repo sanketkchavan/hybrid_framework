@@ -8,6 +8,19 @@ from utilities import data_source
 
 class TestAddEmployee(WebDriverWrapper):
 
+    @pytest.mark.parametrize("username, password, upload_file, expected_error",
+                             data_source.test_add_valid_employee_data)
+    def test_invalid_profile_upload(self):
+        self.driver.find_element(By.NAME, "username").send_keys(username)
+        self.driver.find_element(By.NAME, "password").send_keys(password)
+        self.driver.find_element(By.XPATH, "//button[normalize-space()='Login']").click()
+        self.driver.find_element(By.XPATH, "//span[normalize-space()='PIM']").click()
+        self.driver.find_element(By.LINK_TEXT, "Add Employee").click()
+        self.driver.find_element(By.XPATH, "//input[@type='file']").send_keys(
+            r"C:/Users/157536/Downloads/scan_photo.pdf")
+        actual_error = self.driver.find_element(By.XPATH, "//span[contains(normalize-space(), 'not allowed')]").text
+        assert_that(actual_error).contains(expected_error)
+
     @pytest.mark.parametrize(
         "username, password, firstname, middlename, lastname, expected_profile_header,expected_firstname",
         data_source.test_add_valid_employee_data

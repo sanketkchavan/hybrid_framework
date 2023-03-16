@@ -35,3 +35,10 @@ print(lst)
 
 print(df.values)
 print(df.values.tolist())
+
+print("-" * 100)
+"""Read Json File"""
+dic=pandas.read_json(path_or_buf="../test_data/data.json",typ="dictionary")
+print(dic)
+print(dic['browser'])
+print(dic['url'])
