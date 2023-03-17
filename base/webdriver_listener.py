@@ -12,9 +12,7 @@ class WebDriverWrapper:
     def browser_config(self):
         browser_name = read_utils.get_value_from_json("../test_data/data.json", "browser")
 
-        if browser_name == "edge":
-            self.driver = webdriver.Edge()
-        elif browser_name == "ff":
+        if browser_name == "ff":
             self.driver = webdriver.Firefox()
         else:
             self.driver = webdriver.Chrome()
